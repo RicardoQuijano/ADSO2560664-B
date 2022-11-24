@@ -1,3 +1,4 @@
+import os
 spotify={}
 canciones={}
 def añadirArtista (diccionario):
@@ -52,9 +53,20 @@ def buscarArtista (diccionario):
     else:
         print("El artista no se encuentra en nuestra lista de reproducción")
 
+def buscarCancion (diccionario):
+    cancion=input("Ingrese el nombre de la cancion a buscar: ")
+    for j in diccionario:
+        musica=diccionario[j]
+        if cancion in musica.keys():
+            return print ("La canción se encuentra en el Spotify y el artista es: ",j)
+    print("no se encontro la canción en el Spotify")
+
+
 def eliminarArtista (artista,diccionario):
     if artista in diccionario.keys():
         del diccionario[artista]
+    else:
+        print("El artista no se encuentra en la libreria")
     return diccionario
 
 def ordenarAlfabeticamente (diccionario):
@@ -70,47 +82,94 @@ def masCanciones (diccionario):
             actor=x
     return (actor, mayor)
 
-"""def masLarga(diccionario):
+def masLarga(diccionario):
+    #print(diccionario)
+    lista=[]
     for x in diccionario:
         canciones=diccionario[x]
-        print(canciones)
+        #print(canciones)
         larga=0
-        for j in canciones.values():
+        for can,j in canciones.items():
             valor=j
             tiempo=int(valor[1])
             if larga<tiempo:
                 larga=tiempo
-            print(j,larga)"""
-        
+                cancionmay=can
+        lista+=[x,cancionmay,larga]
+        mayor=0
+        artistamayor=[]
+        for x in range(2,len(lista),3):
+            if lista[x]>mayor:
+                artistamayor=lista[x-2],lista[x-1],lista[x]
+                mayor=lista[x] 
+    return (artistamayor)
 
-#masLarga({'juan': {'1': ('2', '3'), '2': ('3', '4')}, '1': {'1': ('23', '3')}})
+def masCorta(diccionario):
+    #print(diccionario)
+    lista=[]
+    for x in diccionario:
+        canciones=diccionario[x]
+        #print(canciones)
+        larga=99999999999999
+        for can,j in canciones.items():
+            valor=j
+            tiempo=int(valor[1])
+            if tiempo<larga:
+                larga=tiempo
+                cancionmen=can
+        lista+=[x,cancionmen,larga]
+        menor=99999999999
+        artistamenor=[]
+        for x in range(2,len(lista),3):
+            if menor>lista[x]:
+                artistamenor=lista[x-2],lista[x-1],lista[x]
+                menor=lista[x]
+    print (lista) 
+    return (artistamenor)
+
 def menu ():
     while True:
+        #os.system("cls")
         print ("BIENVENIDO A LA BIBLIOTECA SPOTIFY")
         print ("Seleccione el número de la lista según lo que desee")
-        print (" 1 Añadir Artista \n 2 Buscar Artista \n 3 Buscar Cancion \n 4 Eliminar Artista \n 5 Ordenar Alfabeticamente \n 6 El que tiene mas canciones \n 7 El que tiene la canción mas larga \n 8 El que tiene la canción mas Corta \n  Enter para salir")
+        print (" 1 Añadir Artista")
+        print (" 2 Buscar Artista")
+        print (" 3 Buscar Cancion")
+        print (" 4 Eliminar Artista")
+        print (" 5 Ordenar Alfabeticamente")
+        print (" 6 El que tiene mas canciones")
+        print (" 7 El que tiene la canción mas larga")
+        print (" 8 El que tiene la canción mas Corta")
+        print (" 9 Salir")
         seleccion=input()
-
-        if seleccion=="1":
-            print(añadirArtista(spotify))
-        elif seleccion=="2":
-            buscarArtista(spotify)
-        #elif seleccion=="3":
-            #buscarCancion(spotify)
-        elif seleccion=="4":
-            nombre=input("Ingrese el nombre del artista a eliminar:  ")
-            print("Nueva Biblioteca Spotify: ",eliminarArtista(nombre,spotify))
-        elif seleccion=="5":
-            ordenarAlfabeticamente(spotify)
-        elif seleccion=="6":
-            mayor=masCanciones (spotify)
-            print("El artista con mas canciones es:",mayor[0],"con ",mayor[1]," canciones",sep="  ")
-        elif seleccion=="7":
-           print("aun por terminar")
-           # larga=masLarga(spotify)
-        else:
-            print("GRACIAS POR UTILIZAR NUESTROS SERVICIOS")
-            break
+        match seleccion:
+            case "1":
+                print(añadirArtista(spotify))
+            case "2":
+                buscarArtista(spotify)
+            case "3":
+                buscarCancion(spotify)
+            case "4":
+                nombre=input("Ingrese el nombre del artista a eliminar:  ")
+                print("Nueva Biblioteca Spotify: ",eliminarArtista(nombre,spotify))
+            case "5":
+                ordenarAlfabeticamente(spotify)
+            case "6":
+                mayor=masCanciones (spotify)
+                print("El artista con mas canciones es:",mayor[0],"con ",mayor[1]," canciones",sep="  ")
+            case "7":
+                larga=masLarga(spotify)
+                print ("El artista con la canción más larga es: ")
+                print (larga[0], " con la canción ",larga[1]," y la duración es: ",larga[2])
+            case "8":
+                corta=masCorta(spotify)
+                print ("El artista con la canción más corta es: ")
+                print (corta[0], " con la canción ",corta[1]," y la duración es: ",corta[2])
+            case "9":
+                print("GRACIAS POR UTILIZAR NUESTROS SERVICIOS")
+                break
+            case _:
+                print("digitastes un número incorrecto")
 
 
 menu()
