@@ -60,7 +60,24 @@ def eliminarArtista (artista,diccionario):
 def ordenarAlfabeticamente (diccionario):
     orden=sorted(diccionario.items())
     print("Biblioteca SPOTIFY ordenada alfabeticamente x Artista: \n",orden)
-    
+
+def masCanciones (diccionario):
+    mayor=0
+    for x in diccionario:
+        cancion=len(diccionario[x])
+        if cancion > mayor:
+            mayor=cancion
+            actor=x
+    return (actor, mayor)
+
+def masLarga(diccionario):
+    larga=0
+    for x in diccionario:
+        canciones=diccionario[x]
+        print(x,"->",canciones)
+        
+
+masLarga({'juan': {'1': ('2', '3'), '2': ('3', '4')}, '1': {'1': ('23', '3')}})
 def menu ():
     while True:
         print ("BIENVENIDO A LA BIBLIOTECA SPOTIFY")
@@ -79,9 +96,14 @@ def menu ():
             print("Nueva Biblioteca Spotify: ",eliminarArtista(nombre,spotify))
         elif seleccion=="5":
             ordenarAlfabeticamente(spotify)
-
+        elif seleccion=="6":
+            mayor=masCanciones (spotify)
+            print("El artista con mas canciones es:",mayor[0],"con ",mayor[1]," canciones",sep="  ")
+        elif seleccion=="7":
+            larga=masLarga(spotify)
         else:
             print("GRACIAS POR UTILIZAR NUESTROS SERVICIOS")
             break
 
-menu()
+
+#menu()
