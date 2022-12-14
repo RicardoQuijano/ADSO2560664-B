@@ -6,7 +6,7 @@
 from math import trunc
 
 
-dinero1= int(input("Ingrese la cantidad de dinero  $"))
+dinero1= int(input("Ingrese la cantidad de dinero  $ "))
 dinero = dinero1
 cincuenta = trunc(dinero/50000)
 dinero = dinero - (50000*cincuenta)
@@ -23,6 +23,21 @@ dinero = dinero - (1000*mil)
 
 if dinero1<1000:
     print("digito un valor menor a mil pesos")
+elif dinero>0 and dinero<1000:
+    print ("\nEl valor que ingreso: $",dinero1," en billetes es:\n")
+    if cincuenta>=1:
+        print(cincuenta," billete de $50.000")
+    if veintemil>=1:
+        print(veintemil," billete de $20.000")
+    if diezmil>=1:
+        print(diezmil," billete de $10.000")
+    if cincomil>=1:
+        print(cincomil," billete de $5.000")
+    if dosmil>=1:
+        print(dosmil," billete de $2.000")
+    if mil>=1:
+        print(mil," billete de $1.000 ")
+    print("con: ",dinero," pesos")
 else:
     print ("\nEl valor que ingreso: $",dinero1," en billetes es:\n")
     if cincuenta>=1:

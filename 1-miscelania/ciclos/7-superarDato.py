@@ -3,7 +3,7 @@
     introducida por el teclado.
     Es decir cuantos números  de la serie de los naturales debo sumar para superar el dato máximo."""
 
-num = int(input("Ingrese el número máximo   "))
+num = int(input("Ingrese el valor número máximo   "))
 cont=0
 while cont*(cont+1)<=2*num:
     cont+=1
